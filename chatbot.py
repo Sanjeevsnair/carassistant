@@ -21,17 +21,6 @@ from sklearn.metrics.pairwise import cosine_similarity
 import concurrent.futures
 import streamlit as st
 import asyncio
-<<<<<<< HEAD
-
-# Directory containing the PDFs
-current_file_directory = os.path.dirname(os.path.abspath(__file__))
-relative_path = "MARUTHI"
-base_directory = os.path.join(current_file_directory, relative_path)
-
-
-# Download NLTK data
-nltk.download("punkt")
-=======
 import nltk
 nltk.download('punkt_tab')
 
@@ -40,7 +29,6 @@ current_file_directory = os.path.dirname(os.path.abspath(__file__))
 relative_path = "car"
 base_directory = os.path.join(current_file_directory, relative_path)
 
->>>>>>> ac21078 (c)
 stemmer = PorterStemmer()
 
 
@@ -65,51 +53,6 @@ async def correct_spelling_with_google_genai(text):
     return corrected_text
 
 
-<<<<<<< HEAD
-def convert_latex_to_text(latex_text):
-    superscript_map = {
-        "0": "⁰",
-        "1": "¹",
-        "2": "²",
-        "3": "³",
-        "4": "⁴",
-        "5": "⁵",
-        "6": "⁶",
-        "7": "⁷",
-        "8": "⁸",
-        "9": "⁹",
-    }
-    subscript_map = {
-        "0": "₀",
-        "1": "₁",
-        "2": "₂",
-        "3": "₃",
-        "4": "₄",
-        "5": "₅",
-        "6": "₆",
-        "7": "₇",
-        "8": "₈",
-        "9": "₉",
-    }
-
-    def replace_superscripts(match):
-        base = match.group(1)
-        superscript = match.group(2)
-        return base + "".join(superscript_map.get(ch, ch) for ch in superscript)
-
-    def replace_subscripts(match):
-        base = match.group(1)
-        subscript = match.group(2)
-        return base + "".join(subscript_map.get(ch, ch) for ch in subscript)
-
-    latex_text = re.sub(r"\^([0-9]+)\^", replace_superscripts, latex_text)
-    latex_text = re.sub(r"~([0-9]+)~", replace_subscripts, latex_text)
-
-    return latex_text
-
-
-=======
->>>>>>> ac21078 (c)
 def load_api_key():
     with open("secret.key", "rb") as key_file:
         key = key_file.read()
@@ -219,53 +162,7 @@ async def refine_text_with_google_genai(query, result_text):
     except Exception as e:
         st.error(f"An error occurred while refining the text: {e}")
         refined_text = result_text
-<<<<<<< HEAD
-
-    superscript_map = {
-        "^0": "⁰",
-        "^1": "¹",
-        "^2": "²",
-        "^3": "³",
-        "^4": "⁴",
-        "^5": "⁵",
-        "^6": "⁶",
-        "^7": "⁷",
-        "^8": "⁸",
-        "^9": "⁹",
-        "^x": "ˣ",
-        "^+": "⁺",
-        "^-": "⁻",
-        "^=": "⁼",
-        "^(": "⁽",
-        "^)": "⁾",
-    }
-    subscript_map = {
-        "~0~": "₀",
-        "~1~": "₁",
-        "~2~": "₂",
-        "~3~": "₃",
-        "~4~": "₄",
-        "~5~": "₅",
-        "~6~": "₆",
-        "~7~": "₇",
-        "~8~": "₈",
-        "~9~": "₉",
-        "~+~": "₊",
-        "~−~": "₋",
-        "~=~": "₌",
-        "~(~": "₍",
-        "~)~": "₎",
-    }
-
-    for key, value in superscript_map.items():
-        refined_text = refined_text.replace(key, value)
-    for key, value in subscript_map.items():
-        refined_text = refined_text.replace(key, value)
-    refined_text = refined_text.replace("µ", "µ").replace("λ", "λ")
-
-=======
     
->>>>>>> ac21078 (c)
     return refined_text
 
 
@@ -414,11 +311,7 @@ async def main():
     if st.session_state.step == 1:
         st.subheader("Select your Car Brand")
         streams = [
-<<<<<<< HEAD
-            "MARUTI",
-=======
             "Maruthi",
->>>>>>> ac21078 (c)
             "JAGUAR",
             "KIA",
             "VOLVO",
@@ -435,11 +328,7 @@ async def main():
         )
         col1, col2, col3 = st.columns([0.13, 0.17, 1])
         with col1:
-<<<<<<< HEAD
-            if st.button("Back", on_click=back):
-=======
             if st.button("Backad", on_click=back):
->>>>>>> ac21078 (c)
                 pass
         with col2:
             if st.button("Next", key="nextsub", on_click=next):
@@ -469,28 +358,14 @@ async def main():
             "DIESEL",
         ]
         swift = [
-<<<<<<< HEAD
-            "petrol",
-=======
             "PETROL",
->>>>>>> ac21078 (c)
             "CNG",
             
         ]
        
     
         if (
-<<<<<<< HEAD
-            st.session_state.selected_stream == "MARUTHI"
-            or st.session_state.selected_stream
-            == "JAGUAR"
-            or st.session_state.selected_stream
-            == "KIA"
-            or st.session_state.selected_stream == "VOLVO"
-            or st.session_state.selected_stream == "HYUNDAI"
-=======
             st.session_state.selected_stream == "Maruthi"
->>>>>>> ac21078 (c)
         ) and st.session_state.selected_year == "ALTO K10":
             selected_subject = st.selectbox("choose a car type", alto)
             col1, col2, col3 = st.columns([0.13, 0.17, 1])
@@ -501,17 +376,7 @@ async def main():
                 if st.button("Submit", on_click=next):
                     pass
         elif (
-<<<<<<< HEAD
-           st.session_state.selected_stream == "MARUTHI"
-            or st.session_state.selected_stream
-            == "JAGUAR"
-            or st.session_state.selected_stream
-            == "KIA"
-            or st.session_state.selected_stream == "VOLVO"
-            or st.session_state.selected_stream == "HYUNDAI"
-=======
            st.session_state.selected_stream == "Maruthi"
->>>>>>> ac21078 (c)
         ) and st.session_state.selected_year == "ALTO-800":
             selected_subject = st.selectbox("choose a car type", alto8)
             col1, col2, col3 = st.columns([0.13, 0.17, 1])
@@ -522,17 +387,7 @@ async def main():
                 if st.button("Submit", on_click=next):
                     pass
         elif (
-<<<<<<< HEAD
-            st.session_state.selected_stream == "MARUTHI"
-            or st.session_state.selected_stream
-            == "JAGUAR"
-            or st.session_state.selected_stream
-            == "KIA"
-            or st.session_state.selected_stream == "VOLVO"
-            or st.session_state.selected_stream == "HYUNDAI"
-=======
             st.session_state.selected_stream == "Maruthi"
->>>>>>> ac21078 (c)
         ) and st.session_state.selected_year == "SWIFT":
             selected_subject = st.selectbox("choose a car type", swift)
             col1, col2, col3 = st.columns([0.13, 0.17, 1])
@@ -620,11 +475,7 @@ async def main():
             if st.button("New Chat", key="stbackbtn", on_click=newchat):
                 pass
         st.markdown(
-<<<<<<< HEAD
-            '<div class="fixed-text">KTUASSISTANT can make mistakes.</div>',
-=======
             '<div class="fixed-text">CARASSISTANT can make mistakes.</div>',
->>>>>>> ac21078 (c)
             unsafe_allow_html=True,
         )
         if btn:
@@ -641,13 +492,8 @@ async def main():
                         refined_text = await refine_text_with_google_genai(
                             user_query, result_text
                         )
-<<<<<<< HEAD
-                        formatted_text = convert_latex_to_text(refined_text)
-                        response_message = f"\n\n{formatted_text}\n"
-=======
                         
                         response_message = f"\n\n{refined_text}\n"
->>>>>>> ac21078 (c)
                     else:
                         response_message = "No relevant notes found."
 
@@ -693,8 +539,4 @@ async def main():
 
 
 if __name__ == "__main__":
-<<<<<<< HEAD
     asyncio.run(main())
-=======
-    asyncio.run(main())
->>>>>>> ac21078 (c)
